@@ -1,13 +1,25 @@
 import requests
-from bs4 import BeautifulSoup as bs
+from bs4 import BeautifulSoup as bs, Comment
 import pandas as pd
 from pandas import Series, DataFrame
 from datetime import datetime
 import re
+import warnings
+warnings.filterwarnings('ignore')
+
+
+def remove_html_comments(soup1):
+    # 提取注释掉的风级信息
+    comment_tags = soup1.find_all(string=lambda text: isinstance(text, Comment))
+    comment_contents = [comment.strip() for comment in comment_tags if comment.strip()]
+    return comment_contents
+
+
 def tianqi_resp(url_bool, city_re):
     # 模拟浏览器请求配置信息
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36'
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
+                      'Chrome/106.0.0.0 Safari/537.36'
     }
     # 城市以及天气日期
     city = {'郸城': 'dancheng', '天津滨海新区': 'binhaixinqu', '上海浦东新区': 'pudong'}
@@ -32,9 +44,10 @@ def tianqi_resp(url_bool, city_re):
     soup = bs(resp.text, 'html.parser')
     parse(soup, city_re, url_bool)
 
+
 def parse(soup, city_re, url_bool):
     data_all = []
-    # 过滤出天气信息
+    weather = pd.DataFrame()
     # 历史天气信息处理
     if url_bool == 'his':
         tian_three = soup.find("div", {"class": "tian_three"})
@@ -66,6 +79,8 @@ def parse(soup, city_re, url_bool):
             weather.insert(loc=5, column='风向', value=result1['风向'])
             weather.insert(loc=6, column='级数', value=result1['级数'])
 
+        weather.to_csv(f"{city_re}历史天气.csv", encoding="utf_8")
+
     # 未来七天天气信息
     else:
         tian_three = soup.find("ul", {"class": "weaul"}).find_all("li")
@@ -81,17 +96,24 @@ def parse(soup, city_re, url_bool):
             # 温度
             var_temperature = [var_temperature.text for var_temperature in i.find_all("div", {"class": "weaul_z"})][1]
             var_temperature_min, var_temperature_max = map(int, re.findall(r'\d+', var_temperature))
-
             # 风向
-            # wind_direction = [wind_direction.text for wind_direction in i.find_all("div", {"class": "weaul_s"})][1]
-            # print(wind_direction)
+            var_wind = ''.join(remove_html_comments(i))
+            var_wind_temp = re.findall(r'[\u4e00-\u9fa5+\d+]', var_wind)[8:]  # ['东', '南', '风', '3', '级']
+            # 风级
+            var_wind_level = var_wind_temp[-2] + var_wind_temp[-1]
+            # 风向
+            var_wind_direction = ''.join(var_wind_temp[0:len(var_wind_temp) - 2])
 
             data = []
-            data.extend([var_data, var_week, var_temperature_max, var_temperature_min, var_weather])
+            data.extend([var_data, var_week, var_temperature_max, var_temperature_min, var_weather, var_wind_direction,
+                         var_wind_level])
             data_all.append(data)
 
-    weather.to_csv(f"{city_re}天气.csv", encoding="utf_8")
+            weather = pd.DataFrame(data_all)
+            weather.columns = ["日期", "星期", "最高气温", "最低气温", "天气", "风向", "级数"]
+        weather.to_csv(f"{city_re}的七日天气.csv", encoding="utf_8")
 
 
 if __name__ == '__main__':
+    tianqi_resp('his', '上海浦东新区')
     tianqi_resp('fut', '上海浦东新区')

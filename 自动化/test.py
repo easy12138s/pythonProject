@@ -7,15 +7,15 @@ from datetime import datetime
 
 
 def remove_html_comments(soup1):
-    # 去除注释符号
+    # 提取注释掉的风级信息
     comment_tags = soup1.find_all(string=lambda text: isinstance(text, Comment))
     comment_contents = [comment.strip() for comment in comment_tags if comment.strip()]
-    # for comment in comment_contents:
-    #     print(comment)
-    return soup1
+    return comment_contents
+
 
 headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36'
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 '
+                  'Safari/537.36'
 }
 
 url_fut = f'https://www.tianqi.com/pudong/7/'
@@ -36,12 +36,16 @@ for i in tian_three:
     var_weather = i.find('div', class_='weaul_z').text
     # 温度
     var_temperature = [var_temperature.text for var_temperature in i.find_all("div", {"class": "weaul_z"})][1]
-    var_temperature_min,  var_temperature_max = map(int, re.findall(r'\d+', var_temperature))
-
+    var_temperature_min, var_temperature_max = map(int, re.findall(r'\d+', var_temperature))
     # 风向
-    # wind_direction = [wind_direction.text for wind_direction in i.find_all("div", {"class": "weaul_s"})][1]
-    # print(wind_direction)
+    var_wind = ''.join(remove_html_comments(i))
+    var_wind_temp = re.findall(r'[\u4e00-\u9fa5+\d+]', var_wind)[8:]    # ['东', '南', '风', '3', '级']
+    # 风级
+    var_wind_level = var_wind_temp[-2] + var_wind_temp[-1]
+    # 风向
+    var_wind_direction = ''.join(var_wind_temp[0:len(var_wind_temp) - 2])
 
     data = []
-    data.extend([var_data, var_week, var_temperature_max, var_temperature_min, var_weather])
+    data.extend([var_data, var_week, var_temperature_max, var_temperature_min, var_weather, var_wind_direction, var_wind_level])
     data_all.append(data)
+
