@@ -62,7 +62,8 @@ def parse(res):
 
 def spider():
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
+                      "Chrome/102.0.0.0 Safari/537.36"
     }
     for i in range(1, 10):
         print("=========正在爬取第" + str(i) + "页数据==========")
