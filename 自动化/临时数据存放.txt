@@ -1,0 +1,101 @@
+E:\pythonProject\venv\Scripts\python.exe E:\pythonProject\自动化\test.py
+<li>
+<a href="/pudong/?qd=tq7" title="浦东今天天气">
+<div class="weaul_q weaul_qblue"><span class="fl">09-13</span>
+<span class="fr">今天</span>
+</div>
+<div class="weaul_a"><img src="//static.tianqistatic.com/static/tianqi2018/ico2/b8.png"/></div>
+<div class="weaul_z">小雨转中雨</div>
+<div class="weaul_z"><span>24</span>~<span>28</span>℃</div>
+<!-- <div class="weaul_w">空气 <span
+        style="background-color:#79b800;"        >优</span></div>
+    <div class="weaul_s">东南风 2级</div> -->
+<div class="weaul_act">查看天气详情</div>
+</a>
+</li>
+<li>
+<a href="/pudong/mingtian/?qd=tq7" title="浦东明天天气">
+<div class="weaul_q weaul_qblue"><span class="fl">09-14</span>
+<span class="fr">明天</span>
+</div>
+<div class="weaul_a"><img src="//static.tianqistatic.com/static/tianqi2018/ico2/b8.png"/></div>
+<div class="weaul_z">多云转中雨</div>
+<div class="weaul_z"><span>23</span>~<span>24</span>℃</div>
+<!-- <div class="weaul_w">空气 <span
+        style="background-color:#79b800;"        >优</span></div>
+    <div class="weaul_s">北风 3级</div> -->
+<div class="weaul_act">查看天气详情</div>
+</a>
+</li>
+<li>
+<a href="/pudong/houtian/?qd=tq7" title="浦东后天天气">
+<div class="weaul_q weaul_qblue"><span class="fl">09-15</span>
+<span class="fr">后天</span>
+</div>
+<div class="weaul_a"><img src="//static.tianqistatic.com/static/tianqi2018/ico2/b8.png"/></div>
+<div class="weaul_z">中雨</div>
+<div class="weaul_z"><span>23</span>~<span>26</span>℃</div>
+<!-- <div class="weaul_w">空气 <span
+        style="background-color:#79b800;"        >优</span></div>
+    <div class="weaul_s">西北风 2级</div> -->
+<div class="weaul_act">查看天气详情</div>
+</a>
+</li>
+<li>
+<a href="/tianqi/pudong/20230916.html?qd=tq7" title="浦东2023年09月16日天气">
+<div class="weaul_q"><span class="fl">09-16</span>
+<span class="fr">星期六</span>
+</div>
+<div class="weaul_a"><img src="//static.tianqistatic.com/static/tianqi2018/ico2/b8.png"/></div>
+<div class="weaul_z">中雨转小雨</div>
+<div class="weaul_z"><span>22</span>~<span>24</span>℃</div>
+<!-- <div class="weaul_w">空气 <span
+        style="background-color:#79b800;"        >优</span></div>
+    <div class="weaul_s">西北风 2级</div> -->
+<div class="weaul_act">查看天气详情</div>
+</a>
+</li>
+<li>
+<a href="/tianqi/pudong/20230917.html?qd=tq7" title="浦东2023年09月17日天气">
+<div class="weaul_q"><span class="fl">09-17</span>
+<span class="fr">星期日</span>
+</div>
+<div class="weaul_a"><img src="//static.tianqistatic.com/static/tianqi2018/ico2/b8.png"/></div>
+<div class="weaul_z">小雨转晴</div>
+<div class="weaul_z"><span>21</span>~<span>27</span>℃</div>
+<!-- <div class="weaul_w">空气 <span
+        style="background-color:#79b800;"        >优</span></div>
+    <div class="weaul_s">西风 2级</div> -->
+<div class="weaul_act">查看天气详情</div>
+</a>
+</li>
+<li>
+<a href="/tianqi/pudong/20230918.html?qd=tq7" title="浦东2023年09月18日天气">
+<div class="weaul_q"><span class="fl">09-18</span>
+<span class="fr">星期一</span>
+</div>
+<div class="weaul_a"><img src="//static.tianqistatic.com/static/tianqi2018/ico2/b1.png"/></div>
+<div class="weaul_z">晴转多云</div>
+<div class="weaul_z"><span>22</span>~<span>30</span>℃</div>
+<!-- <div class="weaul_w">空气 <span
+        style="background-color:#79b800;"        >优</span></div>
+    <div class="weaul_s">东风 2级</div> -->
+<div class="weaul_act">查看天气详情</div>
+</a>
+</li>
+<li>
+<a href="/tianqi/pudong/20230919.html?qd=tq7" title="浦东2023年09月19日天气">
+<div class="weaul_q"><span class="fl">09-19</span>
+<span class="fr">星期二</span>
+</div>
+<div class="weaul_a"><img src="//static.tianqistatic.com/static/tianqi2018/ico2/b8.png"/></div>
+<div class="weaul_z">阴转小雨</div>
+<div class="weaul_z"><span>23</span>~<span>30</span>℃</div>
+<!-- <div class="weaul_w">空气 <span
+        style="background-color:#79b800;"        >优</span></div>
+    <div class="weaul_s">东南风 2级</div> -->
+<div class="weaul_act">查看天气详情</div>
+</a>
+</li>
+
+进程已结束，退出代码为 0
