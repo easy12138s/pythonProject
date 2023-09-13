@@ -7,8 +7,10 @@ from pyecharts.charts import Bar
 # 保存csv
 path = '今日股票趋势.csv'
 file = open(path, mode="w", encoding='utf-8', newline="")
-csv_f = csv.DictWriter(file, fieldnames=['股票代码', '股票名称', '当前价', '涨跌额', '涨跌幅', '年初至今', '成交量', '成交额', '换手率',
-                                         '市盈(TTM)', '股息率', '市值'])
+csv_f = csv.DictWriter(file,
+                       fieldnames=['股票代码', '股票名称', '当前价', '涨跌额', '涨跌幅', '年初至今', '成交量', '成交额',
+                                   '换手率',
+                                   '市盈(TTM)', '股息率', '市值'])
 # 写入表头
 csv_f.writeheader()
 
@@ -50,10 +52,10 @@ def parse(res):
         market_capital = data['market_capital']
 
         shares_dict = {'股票代码': symbol, '股票名称': name, '当前价': current,
-                     '涨跌额': chg, '涨跌幅': percent, '年初至今': current_year_percent,
-                     '成交量': volume, '成交额': amount, '换手率': turnover_rate,
-                     '市盈(TTM)': pe_ttm, '股息率': dividend_yield,
-                     '市值': market_capital}
+                       '涨跌额': chg, '涨跌幅': percent, '年初至今': current_year_percent,
+                       '成交量': volume, '成交额': amount, '换手率': turnover_rate,
+                       '市盈(TTM)': pe_ttm, '股息率': dividend_yield,
+                       '市值': market_capital}
 
         csv_f.writerow(shares_dict)
 
@@ -84,12 +86,12 @@ def echarts():
     html = (
         Bar(init_opts=opts.InitOpts(width='100%', height="720px", page_title="股票数据可视化")).add_xaxis(
             list(df2['股票名称'].values))
-            .add_yaxis('今日趋势', list(df2['涨跌额'].values))
-            .set_global_opts(
+        .add_yaxis('今日趋势', list(df2['涨跌额'].values))
+        .set_global_opts(
             title_opts=opts.TitleOpts(title="今日涨跌幅"),
             datazoom_opts=opts.DataZoomOpts()
         )
-            .render("股票数据图.html")
+        .render("股票数据图.html")
     )
     return html
 
