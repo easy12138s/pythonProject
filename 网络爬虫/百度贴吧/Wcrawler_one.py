@@ -27,7 +27,7 @@ def main(page):
 
 
 if __name__ == '__main__':
-    with open('./贴吧评论.csv', 'a', encoding='utf-8') as f:
+    with open('贴吧评论.csv', 'a', encoding='utf-8') as f:
         csvwriter = csv.writer(f)
         csvwriter.writerow(('评论用户', '评论时间', '评论内容'))
         for page in range(1, 8):  # 爬取前7页的内容

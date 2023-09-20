@@ -1,24 +1,20 @@
-债券代码
-债券简称
-相关
-申购日期
-申购代码
-申购上限
-(万元)
-正股代码
-正股简称
-正股价
-转股价
-转股价值
-债现价
-转股溢价率
-股权登记日
-每股配售额
-发行规模
-(亿元)
-中签号
-发布日
-中签率
-上市
-时间
-信用评级
+债券代码 SECURITY_CODE
+债券简称 SECURITY_NAME_ABBR
+相关 PUBLIC_START_DATE
+申购日期 PUBLIC_START_DATE
+申购代码 CORRECODE
+申购上限(万元) ONLINE_GENERAL_AAU
+正股代码 CONVERT_STOCK_CODE
+正股简称 SECURITY_SHORT_NAME
+正股价 CONVERT_STOCK_PRICE
+转股价 TRANSFER_PRICE
+转股价值 TRANSFER_VALUE
+债现价 CURRENT_BOND_PRICE
+转股溢价率 TRANSFER_PREMIUM_RATIO
+股权登记日 SECURITY_START_DATE
+每股配售额 FIRST_PER_PREPLACING
+发行规模(亿元) ACTUAL_ISSUE_SCALE
+中签号发布日 BOND_START_DATE
+中签率 ONLINE_GENERAL_LWR
+上市时间 LISTING_DATE
+信用评级 RATING
