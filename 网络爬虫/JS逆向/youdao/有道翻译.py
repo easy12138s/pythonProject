@@ -111,6 +111,7 @@ def youDao_decry(i):
     text = json.loads(decrypted)
     return text['translateResult'][0][0]['tgt']
 
+
 if __name__ == '__main__':
     fanyi = youDao_decry('hello,world!')
     print(fanyi)
