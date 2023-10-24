@@ -1,7 +1,7 @@
 import json
 import requests
 import base64
-
+import cv2 as cv
 headers = {
     'Accept': 'application/json, text/plain, */*',
     'Accept-Language': 'zh-CN',
@@ -20,8 +20,10 @@ data = json.loads(response.text)
 png_data = data['data']['image'][22:]
 
 base_png = base64.b64decode(png_data)
+
 with open('./images/topcheer.png', 'wb') as f:
     f.write(base_png)
+
 
 
 
