@@ -7,17 +7,16 @@
     @file: 有道翻译.py
     @time: 2023/10/17 10:20
 """
+import base64
 import hashlib
 import json
-import os
 import subprocess
 import time
-import requests
 from functools import partial
-import base64
+
+import requests
 #  pip3 install -i https://mirrors.aliyun.com/pypi/simple/ pycryptodome  使用阿里镜像
 from Crypto.Cipher import AES
-import execjs
 
 subprocess.Popen = partial(subprocess.Popen, encoding='utf-8')
 
