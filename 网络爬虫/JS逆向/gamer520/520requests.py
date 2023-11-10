@@ -11,9 +11,10 @@ import pandas as pd
 import requests
 from lxml import etree, html
 
+
 def requests_gamer520(page):
     weather_play = pd.DataFrame(None, columns=["一级下载网址", "游戏名"])
-    for i in range(1, page+1, 1):
+    for i in range(1, page + 1, 1):
         page = '' if i == 1 else f'/page/{i}'
         url = f'https://www.gamer520.com/pcgame{page}'
 
@@ -41,8 +42,8 @@ def requests_gamer520(page):
 
         response = requests.get(url, cookies=cookies, headers=headers)
 
-        data = response.text
-        data_xp = etree.HTML(data)
+        data1 = response.text
+        data_xp = etree.HTML(data1)
         list_play = data_xp.xpath('//h2[@class="entry-title"]/a/@href')
         list_play2 = data_xp.xpath('//h2[@class="entry-title"]/a/text()')
         # str_play = html.tostring(list_play[0], encoding='utf-8').decode('utf-8')
@@ -52,7 +53,8 @@ def requests_gamer520(page):
         weather_play = weather_play._append(weather_data)
     return weather_play.reset_index(drop=True)
 
+
 if __name__ == '__main__':
-    data = requests_gamer520(50)
+    data = requests_gamer520(20)
     data.to_csv('games.csv', encoding='utf-8')
-    data.to_excel('games.xlsx', sheet_name="一级游戏目录",index = False,na_rep = 0,inf_rep = 0)
+    data.to_excel('games.xlsx', sheet_name="一级游戏目录", index=False, na_rep='0', inf_rep='0')
