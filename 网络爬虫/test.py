@@ -1,34 +1,15 @@
-import json
-import requests
-from lxml import etree, html
+import pandas as pd
+import numpy as np
 
-cookies = {
-    'cao_notice_cookie': '1',
-    'PHPSESSID': 'p47ljje7vl0d8eg54rkegiieq5',
-}
 
-headers = {
-    'authority': 'www.gamer520.com',
-    'accept': '*/*',
-    'accept-language': 'zh-CN,zh;q=0.9',
-    'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-    # 'cookie': 'cao_notice_cookie=1; PHPSESSID=p47ljje7vl0d8eg54rkegiieq5',
-    'origin': 'https://www.gamer520.com',
-    'referer': 'https://www.gamer520.com/29217.html',
-    'sec-ch-ua': '"Chromium";v="118", "Google Chrome";v="118", "Not=A?Brand";v="99"',
-    'sec-ch-ua-mobile': '?0',
-    'sec-ch-ua-platform': '"Windows"',
-    'sec-fetch-dest': 'empty',
-    'sec-fetch-mode': 'cors',
-    'sec-fetch-site': 'same-origin',
-    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36',
-    'x-requested-with': 'XMLHttpRequest',
-}
+weather_df = pd.read_csv('E:\pythonProject\网络爬虫\JS逆向\gamer520\games.csv')
 
-data = {
-    'action': 'user_down_ajax',
-    'post_id': '29217',
-}
+weather_df['三级下载地址'] = (weather_df['三级下载地址'].str.replace('\'', '').str.replace(': ', ':')
+              .str.replace('点我  ', '').str.replace(' [立即下载]', '').str.replace('[', '').str.replace(']', '')
+              .str.split('  '))
 
-response = requests.post('https://www.gamer520.com/wp-admin/admin-ajax.php', cookies=cookies, headers=headers, data=data)
-data = json.loads(response.text)
+data_list = weather_df['三级下载地址'].values.tolist()
+weather_df['三级下载地址'] = data_list[0][0]
+weather_df['提取码'] = data_list[0][1]
+weather_df['解压密码'] = data_list[0][-1]
+weather_df.to_csv('test.csv')

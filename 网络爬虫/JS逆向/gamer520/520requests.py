@@ -7,12 +7,16 @@
     @file: 520requests.py
     @time: 2023/10/27 10:40
 """
+import re
 import pandas as pd
 import requests
-from lxml import etree, html
+from lxml import etree
+
+headers = {
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36'}
 
 
-def requests_gamer520(page):
+def gamer520_1(page):
     weather_play = pd.DataFrame(None, columns=["一级下载网址", "游戏名"])
     for i in range(1, page + 1, 1):
         page = '' if i == 1 else f'/page/{i}'
@@ -51,10 +55,58 @@ def requests_gamer520(page):
         data_list = [list_play, list_play2]
         weather_data = pd.DataFrame(data_list, index=["一级下载网址", "游戏名"]).T
         weather_play = weather_play._append(weather_data)
+
     return weather_play.reset_index(drop=True)
 
 
+def gamer520_2(page):
+    weather_df = gamer520_1(page)
+    weather_url = weather_df["一级下载网址"]
+    weather_name = weather_df["游戏名"].str
+    id_1 = weather_url.str.split('/')
+    id_list = [i[3].replace('.html', '') for i in id_1]
+    url_list = []
+    for id_3 in id_list:
+        game_id = id_3
+        response = requests.post(f'https://www.gamer520.com/go?post_id={game_id}', headers=headers)
+        data_js = response.text  # <script type='text/javascript'>window.location='https://xxxxx528.com/19886.html';setTimeout(function(){window.close()},5000)</script>
+        data_url = re.findall(r'location=\'(.*)\';', data_js)[0]
+        url_list.append(data_url)
+
+    weather_df['二级下载网址'] = url_list
+    return url_list, weather_df
+
+
+def gamer520_3(page):
+    url_list, weather_df = gamer520_2(page)
+    data_link = []
+    for url in url_list:
+        response = requests.post(url, headers=headers)
+        data = etree.HTML(response.text)
+        data_s = data.xpath('//meta[@name="description"]/@content')
+        data_link.append(data_s)
+    weather_df['三级下载地址'] = data_link
+    weather_df.to_csv('games.csv')
+
+
+def main(page):
+    gamer520_3(page)
+    weather_df = pd.read_csv('games.csv')
+
+    weather_df['三级下载地址'] = (weather_df['三级下载地址'].str.replace('\'', '').str.replace(': ', ':')
+                                  .str.replace('点我  ', '').str.replace(' [立即下载]', '').str.replace('[',
+                                                                                                        '').str.replace(
+        ']', '')
+                                  .str.split('  '))
+
+    data_list = weather_df['三级下载地址'].values.tolist()
+    weather_df['三级下载地址'] = data_list[0][0]
+    weather_df['提取码'] = data_list[0][1]
+    weather_df['解压密码'] = data_list[0][-1]
+    weather_df1 = weather_df.drop(columns=['Unnamed: 0', '一级下载网址', '二级下载网址'])
+    weather_df1.to_csv('games.csv', index=False)
+    weather_df1.to_excel('games.xlsx', index=False)
+
+
 if __name__ == '__main__':
-    data = requests_gamer520(20)
-    data.to_csv('games.csv', encoding='utf-8')
-    data.to_excel('games.xlsx', sheet_name="一级游戏目录", index=False, na_rep='0', inf_rep='0')
+    main(10)
