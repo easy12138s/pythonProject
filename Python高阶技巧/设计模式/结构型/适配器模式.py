@@ -7,6 +7,8 @@
     @file: 适配器模式.py
     @time: 2024/1/5 13:51
 """
+
+
 # 适配器模式（Adapter Pattern）是作为两个不兼容的接口之间的桥梁。这种类型的设计模式属于结构型模式，它结合了两个独立接口的功能。
 
 class A:
@@ -29,9 +31,9 @@ class Adapter:
     def __init__(self, classname, method):
         self.classname = classname
         self.__dict__update = method
+
     def __getattr__(self, attr):
         return getattr(self.classname, attr)
-
 
 
 def test():
@@ -44,5 +46,6 @@ def test():
     objects.append(Adapter(CC, dict(test=CC.c)))
     for obj in objects:
         obj.test()
+
 
 test()
