@@ -4,20 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="35fcda36-ea07-46f4-833e-5072a7df5fab" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/Python高阶技巧/其他/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python高阶技巧/其他/新年烟花.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/pythonProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pythonProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python高阶技巧/Socket_客户端.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python高阶技巧/其他/Socket_客户端.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python高阶技巧/Socket_服务端.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python高阶技巧/其他/Socket_服务端.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python高阶技巧/常见语法糖.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python高阶技巧/其他/常见语法糖.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python高阶技巧/装饰器.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python高阶技巧/其他/装饰器.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python高阶技巧/闭包.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python高阶技巧/其他/闭包.py" afterDir="false" />
+    <list default="true" id="35fcda36-ea07-46f4-833e-5072a7df5fab" name="更改" comment="2024-02-20">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,12 +83,25 @@
       <updated>1707231414205</updated>
       <workItem from="1707231415247" duration="1501000" />
       <workItem from="1708393870522" duration="763000" />
-      <workItem from="1708410650417" duration="400000" />
+      <workItem from="1708410650417" duration="1586000" />
     </task>
+    <task id="LOCAL-00001" summary="2024-02-20">
+      <option name="closed" value="true" />
+      <created>1708411132187</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1708411132187</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="2024-02-20" />
+    <option name="LAST_COMMIT_MESSAGE" value="2024-02-20" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/pythonProject$.coverage" NAME="新年烟花 覆盖结果" MODIFIED="1707232916675" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Python高阶技巧/其他" />
