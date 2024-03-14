@@ -9,6 +9,7 @@
 
 class MyClass:
     __count = 0
+    num = 0
 
     def __init__(self):
         self.count = 0
@@ -19,14 +20,27 @@ class MyClass:
     def get_count(cls):
         return cls.__count
 
+    @classmethod
+    def set_count(cls, num):
+        cls.__count += num
+        return cls.__count
+
+    @classmethod
+    def set_count1(cls, self):
+        cls.num = 1
+        self.num = 2
+        print(f'类变量：{cls.num},对象变量： {self.num}')
+        return 1
+
 
 a = MyClass()
-print(a.count, a.__hash__())
+print(a.count, a.__hash__(), a.set_count1(a))
 b = MyClass()
 print(b.count, b.__hash__())
 c = MyClass()
 print(c.count, c.__hash__())
 print(MyClass.get_count())
+print(MyClass.set_count(1))
 
 
 class MyClass:
