@@ -1,73 +1,18 @@
-import os
-import random
-from getpass import getpass
-import asyncio
-from pyppeteer import launch
+"""
+    同步  不同程序单元为了完成某个任务,在执行过程中需靠某种通信方式以协调一致，我们称这些程序单元是同步执行的  比如：购物系统中更新商品库存,用行锁作为通信信号
+    异步  不同程序单元之间过程中无需通信协调，也能完成任务的方式，不相关的程序单元之间可以是异步的	比如：爬虫
 
-base_url = 'https://passport.csdn.net/login'
-current_dir = os.path.dirname(os.path.realpath(__file__))
-# Fix:https://github.com/miyakogi/pyppeteer/issues/183 文件权限问题。
-cache_dir = os.path.join(current_dir, 'cache')
-if not os.path.exists(cache_dir): 1
-os.mkdir(cache_dir)
+    1.含义
+    协程(Coroutine)是一种用户态的轻量级线程
 
+    2.特点
+    拥有自己的寄存器上下文
+    协程本质上是单线程
+    3.协程与线程比较
+    1.由于GIL锁的存在,多线程的运行需要频繁的加锁解锁,切换线程,这极大地降低了并发性能,
 
-class Api(object):
-    def __init__(self, account, password):
-        self.url = base_url
-        self.account = account
-        self.password = password
-        self.browser = None
-        self.page = None
+    2.协程本质上是单线程,无需线程上下文切换开销,无需原子操作,
 
-    async def send_key(self):
-        await asyncio.sleep(random.randint(2, 3))
-        switch_btn = await self.page.xpath('//ul/li[@class="text-tab border-right"][2]/a')
-        await switch_btn[0].click()
-        input_account = await self.page.xpath('//div[@class="form-group"]/div/input[1]')
-        await input_account[0].type(self.account,
-                                    {'delay': random.randint(100, 200) - 50})
-        await self.page.type('#password-number', self.password,
-                             {'delay': random.randint(100, 200) - 50})
+    3.协程调度切换时,将寄存器上下文和栈保存到其他地方,在切回来的时候,恢复先前的寄存器上下文和栈,极大的提高了并发性能
+"""
 
-        await self.page.click('button[data-type=account]')
-        await asyncio.sleep(random.randint(5, 10))
-
-    async def crawl(self):
-        # 测试环境下 headless 设置为 False
-        # 生产环境可以修改为无头浏览器
-        self.browser = await launch({
-            'headless': False,
-            'userDataDir': cache_dir,
-            'defaultViewport': {'width': 1440, 'height': 1000},
-            'args': ['--no-sandbox']
-        })
-        self.page = await self.browser.newPage()
-        await self.page.goto(self.url)
-
-        # 伪造当前浏览状态 防止自动化工具检测
-        codes = (
-            "() =>{ Object.defineProperties(navigator,{ webdriver:"
-            "{ get: () => false } }) }",
-            "() =>{ window.navigator.chrome = { runtime: {},  }; }",
-            "() =>{ Object.defineProperty(navigator, 'languages', "
-            "{ get: () => ['en-US', 'en'] }); }",
-            "() =>{ Object.defineProperty(navigator, 'plugins', { "
-            "get: () => [1, 2, 3, 4, 5,6], }); }"
-        )
-        for code in codes:
-            await self.page.evaluate(code)
-        await self.send_key()
-
-
-def main():
-    print('[*] 模拟登陆 CSDN 程序启动...')
-    account = input('[*] 请输入账号：')
-    password = getpass('[*] 请输入密码：')
-    login = Api(account, password)
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(login.crawl())
-
-
-if __name__ == '__main__':
-    main()
