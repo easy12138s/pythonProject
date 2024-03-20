@@ -112,5 +112,5 @@ def youDao_decry(i):
 
 
 if __name__ == '__main__':
-    fanyi = youDao_decry('hello,world!')
+    fanyi = youDao_decry('hello,world.csv!')
     print(fanyi)

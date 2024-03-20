@@ -4,7 +4,12 @@
     使用场景：适合处理突发性大量请求或需要大量线程完成任务、但实际任务处理时间较短
 
 """
+from concurrent.futures import ThreadPoolExecutor
 import concurrent.futures
+# # 线程池中创建100个线程
+# pool = ThreadPoolExecutor(100)
+# # 给线程池添加任务
+# pool.submit('任务函数名', '参数1', '参数2'....)
 
 with concurrent.futures.ThreadPoolExecutor() as pool:
     pass
