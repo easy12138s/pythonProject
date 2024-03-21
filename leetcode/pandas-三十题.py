@@ -62,6 +62,38 @@ def find_products(products: pd.DataFrame) -> pd.DataFrame:
     return products[['product_id']]
 
 
+"""
+    Customers 表：
+    +-------------+---------+
+    | Column Name | Type    |
+    +-------------+---------+
+    | id          | int     |
+    | name        | varchar |
+    +-------------+---------+
+    在 SQL 中，id 是该表的主键。
+    该表的每一行都表示客户的 ID 和名称。
+    Orders 表：
+    +-------------+------+
+    | Column Name | Type |
+    +-------------+------+
+    | id          | int  |
+    | customerId  | int  |
+    +-------------+------+
+    在 SQL 中，id 是该表的主键。
+    customerId 是 Customers 表中 ID 的外键( Pandas 中的连接键)。
+    该表的每一行都表示订单的 ID 和订购该订单的客户的 ID。
+    
+    找出所有从不点任何东西的顾客。
+"""
+
+
+def find_customers(customers: pd.DataFrame, orders: pd.DataFrame) -> pd.DataFrame:
+    world = pd.merge(customers, orders, how='outer', left_on='id', right_on='customerId')
+    world = world[world.isnull().any(axis=1)][['name']].rename(columns={'name': 'Customers'}, inplace=True)
+    return world
+
+
 if __name__ == '__main__':
-    world1 = pd.read_csv('./datafile/products.csv')
-    print(find_products(world1))
+    world1 = pd.read_csv('./datafile/Customers.csv')
+    world2 = pd.read_csv('./datafile/Orders.csv')
+    print(find_customers(world1, world2))
