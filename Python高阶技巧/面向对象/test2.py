@@ -13,6 +13,11 @@ class imp:
     def make(self):
         pass
 
-print(func([]))
-print(var_1)
-print(var_2)
+
+name = 1
+print(type(name))
+name = 'a'
+print(type(name))
+
+print(5/2)
+print(5//2)
